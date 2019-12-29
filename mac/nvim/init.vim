@@ -52,8 +52,6 @@ Plug 'prettier/vim-prettier', {
 
 call plug#end()
 
-
-
 " ----------- THEME ----------
 let g:dracula_italic = 0
 colorscheme dracula
@@ -92,8 +90,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 
-
-" --------------- Prettier --------------
 
 
 
