@@ -1,8 +1,4 @@
-# i3blocks config file
-#
-# Please see man i3blocks for a complete reference!
-# The man page is also hosted at http://vivien.github.io/i3blocks
-#
+
 # List of valid properties:
 #
 # align
@@ -100,8 +96,8 @@ interval=10
 # The battery instance defaults to 0.
 [battery]
 #label=BAT
-command=~/.config/i3blocks/battery/battery
-label=power
+command=~/.config/i3blocks/battery2/battery2
+label=パワー
 interval=30
 color=#00FA9A
 
@@ -132,16 +128,6 @@ color=#00FA9A
 # Support multiple VPN, with colors.
 #[openvpn]
 #interval=once
-
-# Temperature
-#
-# Support multiple chips, though lm-sensors.
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-#[temperature]
-#label=TEMP
-#interval=10
-
 # Key indicators
 #
 # Add the following bindings to i3 config file:
