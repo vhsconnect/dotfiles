@@ -25,12 +25,23 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Escape kill
 
+# Volume controls
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% 
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- 
+bindsym XF86AudioMute exec amixer -D pulse sset Master 0%
+
+# Next track
+bindsym XF86AudioNext exec playerctl next
+
 # rofi
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # take a screenshot
 #bindsym $mod+m exec import -window root ~/Pictures/sshot.png
-bindsym $mod+m exec --no-startup-id "screenshot"
+bindsym $mod+m exec --no-startup-id "shutter -s"
 
 #Change focus
 bindsym $mod+h focus left
@@ -83,10 +94,14 @@ bindsym $mod+a focus parent
 bindsym $mod+Tab workspace prev
 bindsym $mod+Shift+Tab workspace next
 
-set $ws1 "1: " 
-set $ws2 "2: " 
-set $ws3 "3: " 
-set $ws4 "4: "
+set $ws1 "1:  " 
+set $ws2 "2:  " 
+set $ws3 "3:  " 
+set $ws4 "4:  "
+set $ws5 "5:  " 
+set $ws6 "6: \e636" 
+set $ws7 "7: \e679" 
+set $ws8 "8:  "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1 
@@ -126,15 +141,15 @@ bindsym $mod+Shift+e exec  "i3-nagbar -t warning -m 'You pressed the exit shortc
 
 # resize window (you can also use the mouse for that)
 mode "resize" { 
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        # bindsym Left resize shrink width 10 px or 10 ppt
+        # bindsym Down resize grow height 10 px or 10 ppt
+        # bindsym Up resize shrink height 10 px or 10 ppt
+        # bindsym Right resize grow width 10 px or 10 ppt
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -145,7 +160,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3blocks/config
-        font pango:fa-solid-900 10
+        font pango: GohuFont Nerd Font Italic 14
         colors {
                 focused_workspace $raingreen $raingreen $black
                 inactive_workspace $black $black $raingreen
@@ -168,7 +183,7 @@ client.urgent $cbg $cunfo $ccolor $cindi $cunfo
 #for_window [class="^.*"] border pixel 0
 
 # to execute a command on start use exec or exec_always
-exec --no-startup-id  feh --bg-scale ~/Pictures/mpu2.png
+exec --no-startup-id  feh --bg-scale ~/Pictures/noirlac4.gif
 
 
 #transition effects and rofi opacity 

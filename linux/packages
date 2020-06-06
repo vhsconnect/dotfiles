@@ -1,4 +1,28 @@
+[[font: Iosevka]]
 lxappearance
-.gtkrc-2.0 > to tweak lxappearance
-font: Iosevka
 xclip
+fzf
+gthumb
+rsync
+fontforge
+silversearcher-ag
+ack
+scdl (pip3) 
+ffmpeg
+python3-pip
+youtube-dl
+zathura
+gparted
+rofi
+i3status
+i3blocks
+i3
+feh
+dmenu
+git
+leafpad
+tmux
+acpi
+nodejs
+andoid-sdk-platform-tools
+

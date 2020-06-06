@@ -1,3 +1,4 @@
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -89,9 +90,6 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -116,3 +114,42 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+
+# set vi mode
+set -o vi
+# default editor
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias ytdl='youtube-dl -x --no-playlist'
+alias cdconfig='cd ~/Repos/dotfiles/self/dotfiles/linux/ && ls -a'
+alias img='gthumb'
+alias lss='ls -l --block-size=M'
+alias lf='ls -l | grep "^-"'
+alias l.f='ls -ld .* | grep "^-"'
+alias ld='ls -l | grep "^d"'
+alias l.d='ls -ld .* | grep "^d"'
+alias dud='du -d 1 -h'
+alias duf='du -sh *'
+alias fdir='find . -type d -name'
+alias ff='find . -type f -name'
+alias h='history'
+alias hgrep='history | grep'
+alias lgrep='ls -l | grep'
+alias lagrep='ls -lA | grep'
+alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,.tldr,node_modules,Trash,vendor}'
+
+alias l='ls -CF'
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export FZF_DEFAULT_OPTS="--height=50% --multi --preview='head -$LINES {}' --preview-window='hidden' --bind='ctrl-i:toggle-preview,ctrl-y:execute-silent(echo {+} | xclip -i -selection 'clipboard')'"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
