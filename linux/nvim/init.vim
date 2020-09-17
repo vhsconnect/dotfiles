@@ -1,9 +1,8 @@
 let g:mapleader = "\\" 
-" let mapleader= "\\"
 packloadall
 syntax enable
 set nocompatible
-set rnu
+set nu rnu
 set noshowmode
 set cursorline
 set autoindent
@@ -17,6 +16,10 @@ set expandtab
 set mouse=a
 set autowrite
 set inccommand=split
+set foldmethod=indent   
+set foldnestmax=10
+set nofoldenable
+set foldlevel=2
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
@@ -90,15 +93,17 @@ let g:lightline = {
       \ }
 
 " ----------- highlighting ----------
-highlight Visual ctermfg=Blue ctermbg=White
-
+highlight Visual ctermfg=238 ctermbg=84
 
 " ----------- markdown preview ----------
 let g:mkdp_auto_start = 1
-" let g:mkdp_browser = 'firefox'
 let g:mkdp_refresh_slow = 1
+
 " ----------- Auto Pairs ----------
 let g:AutoPairsShortcutToggle = '<M-P>'
+
+" ----------- Search and Replace ----------
+nnoremap <space>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 " ----------- copy to system clipboard ----------
 
@@ -118,6 +123,7 @@ vmap <y> :w! ~/.vbuf<CR>
 nmap <Y> :.w! ~/.vbuf<CR>     
 "paste the contents of the buffer file
 nmap <p> :r ~/.vbuf<CR>       
+
 "----------- ctrlP -------------
 "
 " set wildmode=list:longest,list:full
@@ -154,22 +160,27 @@ nnoremap H 10h
 " --------------- REMAPS FZF --------------
 imap <c-x><c-l> <plug>(fzf-complete-buffer-line)
 nnoremap <silent> <c-p> :GFiles<CR>
-nnoremap <c-m> :BLines<CR> 
+nnoremap <leader>p :BLines<CR> 
 nnoremap <silent> <c-g> :Ag<CR> 
+
+" --------------- REMAPS COLORS --------------
+
+nnoremap <space>1 :colorscheme OceanicNext<CR>
+nnoremap <space>2 :colorscheme desert256<CR>
+nnoremap <space>3 :colorscheme seoul256<CR>
+nnoremap <space>4 :colorscheme jhdark<CR>
+nnoremap <space>5 :colorscheme calmar256-light<CR>
+
 
 
 " --------------- navigate splits --------------
-
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-
-
 " --------------- FZF --------------
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
 
 " --------------- Ale --------------
 let g:ale_lint_on_text_changed = 'never'
@@ -182,7 +193,7 @@ let g:ale_linters = {
 let g:ale_linter_aliases = {'vue': ['css', 'javascript']}
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
+      \ 'javascript': ['eslint', 'prettier'],
       \ 'json': ['prettier'],
       \ 'typescript': ['prettier']
       \ }
