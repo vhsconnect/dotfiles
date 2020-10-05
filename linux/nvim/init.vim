@@ -103,7 +103,6 @@ let g:mkdp_refresh_slow = 1
 let g:AutoPairsShortcutToggle = '<M-P>'
 
 " ----------- Search and Replace ----------
-nnoremap <space>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 " ----------- copy to system clipboard ----------
 
@@ -138,7 +137,7 @@ nmap <p> :r ~/.vbuf<CR>
 nnoremap <leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 nnoremap <leader>R :%s/\<<C-r><C-w>\>//gci<Left><Left><Left><Left>
 vnoremap <leader>r y :%s/<C-r>"//gc<Left><Left><Left>
-
+nnoremap <space>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 " --------------- NERDTREE --------------
 let NERDTreeShowHidden = 1
