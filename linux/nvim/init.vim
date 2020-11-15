@@ -26,7 +26,6 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " --------------- vim-plug ----------
 
 call plug#begin('~/.vim/plugged')
-" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/vim-easy-align'
@@ -37,9 +36,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'dense-analysis/ale'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
-" Plug 'ervandew/supertab'
 Plug 'posva/vim-vue'
 Plug 'mileszs/ack.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -53,7 +50,6 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'ycm-core/YouCompleteMe'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
-" Plug 'kien/ctrlp.vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/1.x',
@@ -102,8 +98,6 @@ let g:mkdp_refresh_slow = 1
 " ----------- Auto Pairs ----------
 let g:AutoPairsShortcutToggle = '<M-P>'
 
-" ----------- Search and Replace ----------
-
 " ----------- copy to system clipboard ----------
 
 function! ClipboardYank()
@@ -122,15 +116,6 @@ vmap <y> :w! ~/.vbuf<CR>
 nmap <Y> :.w! ~/.vbuf<CR>     
 "paste the contents of the buffer file
 nmap <p> :r ~/.vbuf<CR>       
-
-"----------- ctrlP -------------
-"
-" set wildmode=list:longest,list:full
-" set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-" let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-" let g:ctrlp_use_caching = 1
-" let g:ctrlp_show_hidden = 1
 
 
 "----------- global subs with confirm ------------
@@ -156,21 +141,19 @@ nnoremap K 5k
 nnoremap J 5j
 nnoremap L 10l
 nnoremap H 10h
+
 " --------------- REMAPS FZF --------------
 imap <c-x><c-l> <plug>(fzf-complete-buffer-line)
-nnoremap <silent> <c-p> :GFiles<CR>
+nnoremap <silent> <c-p> :Files<CR>
 nnoremap <leader>p :BLines<CR> 
 nnoremap <silent> <c-g> :Ag<CR> 
 
 " --------------- REMAPS COLORS --------------
-
 nnoremap <space>1 :colorscheme OceanicNext<CR>
 nnoremap <space>2 :colorscheme desert256<CR>
 nnoremap <space>3 :colorscheme seoul256<CR>
 nnoremap <space>4 :colorscheme jhdark<CR>
 nnoremap <space>5 :colorscheme calmar256-light<CR>
-
-
 
 " --------------- navigate splits --------------
 nnoremap <C-J> <C-W><C-J>
@@ -188,13 +171,16 @@ let g:ale_lint_on_enter = 0
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
       \ 'javascript': ['eslint', 'prettier'],
+      \ 'html': ['tidy'],
+      \ 'haskell': ['hdevtools'],
       \ }
 let g:ale_linter_aliases = {'vue': ['css', 'javascript']}
 let g:ale_linters_explicit = 1
 let g:ale_fixers = {
       \ 'javascript': ['eslint', 'prettier'],
       \ 'json': ['prettier'],
-      \ 'typescript': ['prettier']
+      \ 'typescript': ['prettier'],
+      \ 'haskell': ['hindent']
       \ }
 highlight ALEWarning ctermbg=Blue ctermfg=Yellow
 highlight ALEError ctermbg=Blue ctermfg=White
@@ -205,14 +191,16 @@ let g:airline_section_z = ''
 let g:ale_sign_error = '🚨'
 let g:ale_sign_warning = '⚡️'
 " let g:ale_javascript_eslint_use_global = 1
+
 " --------------- Prettier on save --------------
-" let g:prettier#autoformat = 0
-" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
+let g:prettier#autoformat = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
 
 " ---------------  YCM --------------
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
 " ---------------  TSUQOYOMI --------------
 " autocmd FileType typescript setlocal completeopt+=menu,preview
 " autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>

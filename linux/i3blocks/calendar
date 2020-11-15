@@ -2,7 +2,7 @@
 
 WIDTH=${WIDTH:-200}
 HEIGHT=${HEIGHT:-200}
-DATEFMT=${DATEFMT:-"+%a %d.%m.%Y %H:%M:%S"}
+DATEFMT=${DATEFMT:-"+%a %d.%m   %H:%M"}
 SHORTFMT=${SHORTFMT:-"+%H:%M:%S"}
 
 OPTIND=1
@@ -36,5 +36,5 @@ case "$BLOCK_BUTTON" in
 	    --posx=$posX --posy=$posY \
 	    > /dev/null"
 esac
-echo "$LABEL   $(date "$DATEFMT")"
-echo "$LABEL   $(date "$SHORTFMT")"
+echo "$(date "$DATEFMT")"
+echo "$(date "$SHORTFMT")"

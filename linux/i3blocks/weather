@@ -1,0 +1,25 @@
+#! /bin/bash
+
+Data=$(curl -Ss wttr.in/SSH?format=j1) 
+Condition=$(curl -Ss wttr.in/SSH?format="%C\n")
+
+overcast= 
+rain= 
+ice= 
+sun= 
+
+
+humidity=$(echo $Data | jq -r '.current_condition[0].humidity')
+temp=$(echo $Data | jq -r '.current_condition[0].temp_C')°
+
+if [ "$Condition" = "Overcast" ]; then
+  emo=$overcast
+elif [ "$Condition" = "Rain" ]; then
+  emo=$rain
+elif [ "$Condition" = "Snow" ]; then
+  emo=$ice
+else 
+  emo=$sun
+fi
+
+echo "$emo  $humidity $temp" 

@@ -135,7 +135,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
 
 # lock machine
-bindsym $mod+Shift+x exec --no-startup-id i3lock
+bindsym $mod+Shift+x exec --no-startup-id i3lock -i ~/Pictures/goblin-coat-of-arms.png
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -152,11 +152,6 @@ mode "resize" {
         bindsym k resize grow height 10 px or 10 ppt
         bindsym j resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
-
-        # bindsym Left resize shrink width 10 px or 10 ppt
-        # bindsym Down resize grow height 10 px or 10 ppt
-        # bindsym Up resize shrink height 10 px or 10 ppt
-        # bindsym Right resize grow width 10 px or 10 ppt
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -190,16 +185,14 @@ client.urgent $cbg $cunfo $ccolor $cindi $cunfo
 #for_window [class="^.*"] border pixel 0
 
 # to execute a command on start use exec or exec_always
-exec --no-startup-id  feh --bg-scale ~/Pictures/mpu2.png
+exec --no-startup-id  feh --bg-scale ~/Pictures/forrest4.png
 
-
-#transition effects and rofi opacity 
+#compositor w/ transition effects and rofi opacity 
 exec --no-startup-id compton -f
 
-#start nm-applet
+exec --no-startup-id gromit-mpx
 exec --no-startup-id nm-applet
 exec --no-startup-id lxsession
-#exec --no-startup-id autocutsel
 
 #misc
 #floating calendar

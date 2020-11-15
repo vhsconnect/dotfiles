@@ -17,54 +17,31 @@
 # urgent
 
 # Global properties
-#
-# The top properties below are applied to every block, but can be overridden.
-# Each block command defaults to the script name to avoid boilerplate.
-# Change $SCRIPT_DIR to the location of your scripts!
 command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=30
 markup=none
 
-# Disk usage
-#
-# The directory defaults to $HOME if the instance is not specified.
-# The script may be called with a optional argument to set the alert
-# (defaults to 10 for 10%).
-# [disk]
-# label=HOME
-#DIR=/mnt/data
-interval=30
-
-
-
-# Battery indicator
-#
-# The battery instance defaults to 0.
 [battery]
-#label=BAT
-command=~/.config/i3blocks/battery2/battery2
-label=パワー
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/battery2
+label= 
 interval=30
 color=#00FA9A
 
-
 [bandwidth]
-command=~/.config/i3blocks/bandwidth3/bandwidth3
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/bandwidth3
 markup=pango
-label=
+label=
 interval=persist
 color=#00FA9A
 
-# [time]
-# label=
-# command=date '+%m-%d | %H:%M'
-# interval=5
-# color=#00FA9A
-
-[calendar]
-# label=日付
+[weather]
 label=
-command=~/.config/i3blocks/calendar/calendar
-interval=59
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/weather
+interval=1800
 color=#00FA9A
 
+[calendar]
+label=
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/calendar
+interval=59
+color=#00FA9A
