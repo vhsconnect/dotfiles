@@ -1,112 +1,27 @@
-
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
+set -o vi
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+export EDITOR='nvim'
+export VISUAL='nvim'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+HISTCONTROL=ignoreboth
+HISTSIZE=
+HISTFILESIZE=
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
+# AQUA="\[$(tput setaf 42)\]"
+# RESET="\[$(tput sgr0)\]"
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+PS1='${debian_chroot:+($debian_chroot)}\[$(tput setaf 48)\]\h\[$(tput setaf 48)\]@\[$(tput setaf 48)\]\A \[$(tput setaf 11)\]\W$\[$(tput setaf 11)\]\[$(tput sgr0) '
 
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-AQUA="\[$(tput setaf 42)\]"
-RESET="\[$(tput sgr0)\]"
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[$(tput setaf 48)\]\h\[$(tput setaf 48)\]@\[$(tput setaf 48)\]\A \[$(tput setaf 11)\]\W$\[$(tput setaf 11)\]\[$(tput sgr0) '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# bash completion
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -116,40 +31,55 @@ if ! shopt -oq posix; then
 fi
 
 
-# set vi mode
-set -o vi
-# default editor
-export EDITOR='nvim'
-export VISUAL='nvim'
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-alias ll='ls -alF'
+#"alert" alias for long running commands
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
 alias la='ls -A'
-alias ytdl='youtube-dl -x --no-playlist'
-alias cdconfig='cd ~/Repos/dotfiles/self/dotfiles/linux/ && ls -a'
-alias img='gthumb'
-alias lss='ls -l --block-size=M'
-alias lf='ls -l | grep "^-"'
-alias l.f='ls -ld .* | grep "^-"'
-alias ld='ls -l | grep "^d"'
-alias l.d='ls -ld .* | grep "^d"'
+alias ll='ls -alF --block-size=M'
+alias lss='ls -lS --block-size=M'
+alias lsg='ls | grep'
 alias dud='du -d 1 -h'
 alias duf='du -sh *'
-alias fdir='find . -type d -name'
 alias ff='find . -type f -name'
 alias h='history'
 alias hgrep='history | grep'
-alias lgrep='ls -l | grep'
-alias lagrep='ls -lA | grep'
 alias sgrep='grep -R -n -H -C 5 --exclude-dir={.git,.svn,.tldr,node_modules,Trash,vendor}'
+alias vi='nvim `fzf`'
+alias ytdl='youtube-dl -x --no-playlist'
+alias cdconfig='cd ~/Repos/dotfiles/self/dotfiles/linux/ && ls -a'
+alias todo='nvim ~/Documents/todo'
+alias img='gthumb'
+alias pdf='evince'
+alias copyi='xclip -i -selection clipboard' #* 
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
-alias l='ls -CF'
-
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
-export FZF_DEFAULT_OPTS="--height=50% --multi --preview='head -$LINES {}' --preview-window='hidden' --bind='ctrl-i:toggle-preview,ctrl-y:execute-silent(echo {+} | xclip -i -selection 'clipboard')'"
+# fzf
+export FZF_DEFAULT_COMMAND="ag --ignore /node_modules/ --ignore /.git/ --hidden -g ''"
+export FZF_DEFAULT_OPTS="--height=60% --multi --preview='bat --theme=zenburn --style=numbers --color=always {}' --preview-window='hidden' --bind='ctrl-i:toggle-preview,ctrl-y:execute-silent(echo {+} | xclip -i -selection 'clipboard')' --color='bg:237,bg+:237,info:214,border:197,spinner:214' \
+--color='hl:45,fg:252,header:199,fg+:45' \
+--color='pointer:214,marker:233,prompt:233,hl+:214'"
+export FZF_ALT_C_COMMAND="find . -type d \( -path ./.dbus -o -path ./.cache -o -path ./.gvfs \) -prune -false -o -name '*'"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# package managers
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+export PATH="$HOME/.cabal/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

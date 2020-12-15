@@ -5,9 +5,7 @@
  ******************************************************************************/
 
 * {
-    /**** Solarized colors ****
-    * NOTE: I am including all of them even though I am using a sub-set. I keep
-    * tweaking my theme and having access to all of the colors here is handy. */
+    /**** Solarized colors *****/
 
     base03: #002b36;
     base02: #073642;
@@ -68,7 +66,6 @@ configuration {
   display-run: "> ";
   show-icons: true;
 }
-
 
 
 window {

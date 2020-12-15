@@ -46,10 +46,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-" Plug 'vim-scripts/tsuquyomi'
-Plug 'ycm-core/YouCompleteMe'
+Plug 'vim-scripts/tsuquyomi'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'ycm-core/YouCompleteMe'
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/1.x',
@@ -117,12 +119,14 @@ nmap <Y> :.w! ~/.vbuf<CR>
 "paste the contents of the buffer file
 nmap <p> :r ~/.vbuf<CR>       
 
+"-----------  snippets ------------
+nnoremap <leader>s :r ~/.config/nvim/snippets/
 
 "----------- global subs with confirm ------------
-nnoremap <leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-nnoremap <leader>R :%s/\<<C-r><C-w>\>//gci<Left><Left><Left><Left>
-vnoremap <leader>r y :%s/<C-r>"//gc<Left><Left><Left>
 nnoremap <space>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+nnoremap <space>R :%s/\<<C-r><C-w>\>//gci<Left><Left><Left><Left>
+vnoremap <space>r y :%s/<C-r>"//gc<Left><Left><Left>
+
 
 " --------------- NERDTREE --------------
 let NERDTreeShowHidden = 1
@@ -143,47 +147,61 @@ nnoremap L 10l
 nnoremap H 10h
 
 " --------------- REMAPS FZF --------------
+
 imap <c-x><c-l> <plug>(fzf-complete-buffer-line)
 nnoremap <silent> <c-p> :Files<CR>
 nnoremap <leader>p :BLines<CR> 
 nnoremap <silent> <c-g> :Ag<CR> 
-
+inoremap <expr> <c-x><c-k> fzf#vim#complete('cat /usr/share/dict/words')
 " --------------- REMAPS COLORS --------------
+
 nnoremap <space>1 :colorscheme OceanicNext<CR>
 nnoremap <space>2 :colorscheme desert256<CR>
 nnoremap <space>3 :colorscheme seoul256<CR>
 nnoremap <space>4 :colorscheme jhdark<CR>
 nnoremap <space>5 :colorscheme calmar256-light<CR>
-
+nnoremap <space>6 :colorscheme bubblegum-256-light<CR>
+nnoremap <space>7 :colorscheme horseradish256<CR>
+nnoremap <space>8 :colorscheme babymate256<CR>
+nnoremap <space>9 :colorscheme zenburn<CR>
+nnoremap <space>0 :colorscheme dracula<CR>
 " --------------- navigate splits --------------
+
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 " --------------- FZF --------------
+"
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
 " --------------- Ale --------------
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
+let g:ale_typescript_tsserver_config_path = '/home/vhs/.nvm/versions/node/v12.16.1/bin/tsserver'
 let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
 let g:ale_linters = {
-      \ 'javascript': ['eslint', 'prettier'],
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint', 'tsserver'],
       \ 'html': ['tidy'],
       \ 'haskell': ['hdevtools'],
+      \ 'css': ['stylelint']
       \ }
 let g:ale_linter_aliases = {'vue': ['css', 'javascript']}
-let g:ale_linters_explicit = 1
 let g:ale_fixers = {
       \ 'javascript': ['eslint', 'prettier'],
       \ 'json': ['prettier'],
-      \ 'typescript': ['prettier'],
-      \ 'haskell': ['hindent']
+      \ 'haskell': ['hindent'],
+      \ 'css': ['stylelint']
       \ }
+let g:deoplete#enable_at_startup = 1
+let g:ale_completion_enabled=1
+set omnifunc=ale#completion#OmniFunc
 highlight ALEWarning ctermbg=Blue ctermfg=Yellow
 highlight ALEError ctermbg=Blue ctermfg=White
+
+" --------------- Airline --------------
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
@@ -193,17 +211,26 @@ let g:ale_sign_warning = '⚡️'
 " let g:ale_javascript_eslint_use_global = 1
 
 " --------------- Prettier on save --------------
-let g:prettier#autoformat = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
-
-" ---------------  YCM --------------
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
+" ---------------  Haskell-vim --------------
+"
+let g:haskell_indent_disable = 1
+let g:haskell_enable_quantification = 1   
+let g:haskell_enable_recursivedo = 1     
+let g:haskell_enable_arrowsyntax = 1    
+let g:haskell_enable_pattern_synonyms = 1
+let g:haskell_enable_typeroles = 1     
+let g:haskell_enable_static_pointers = 1
+let g:haskell_backpack = 1   
+"---------------  YCM --------------
+" let g:ycm_seed_identifiers_with_syntax = 1
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " ---------------  TSUQOYOMI --------------
-" autocmd FileType typescript setlocal completeopt+=menu,preview
-" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+autocmd FileType typescript setlocal completeopt+=menu,preview
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " ---------------  vue syntax highlighting | vim-vue --------------
 let g:vue_pre_processors = 'detect-on-enter'
