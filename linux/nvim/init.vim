@@ -18,6 +18,8 @@ set autowrite
 set inccommand=split
 set foldmethod=indent   
 set foldnestmax=10
+set dictionary?
+set dictionary+=/usr/share/dict/words
 set nofoldenable
 set foldlevel=2
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -172,7 +174,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " --------------- FZF --------------
-"
+
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 " --------------- Ale --------------
 let g:ale_lint_on_text_changed = 'never'
@@ -195,24 +197,44 @@ let g:ale_fixers = {
       \ 'haskell': ['hindent'],
       \ 'css': ['stylelint']
       \ }
-let g:deoplete#enable_at_startup = 1
 let g:ale_completion_enabled=1
 set omnifunc=ale#completion#OmniFunc
 highlight ALEWarning ctermbg=Blue ctermfg=Yellow
 highlight ALEError ctermbg=Blue ctermfg=White
+let g:ale_sign_error = '🚨'
+let g:ale_sign_warning = '⚡️'
+
+" --------------- Deoplete --------------
+
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+      \'auto_complete_delay': 500,
+      \})
+call deoplete#custom#source('_',
+		\ 'disabled_syntaxes', ['Comment', 'String', 'Constant', 'Buffer'])
+
+autocmd FileType txt
+\ call deoplete#custom#buffer_option('auto_complete', v:false)
+inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ deoplete#manual_complete()
+		function! s:check_back_space() abort "{{{
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~ '\s'
+		endfunction"}}}
+highlight Pmenu ctermbg=49 ctermfg=0
+highlight PmenuSel ctermbg=0 ctermfg=49
+highlight PmenuSbar ctermbg=0 ctermfg=49
 
 " --------------- Airline --------------
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline_section_z = ''
-let g:ale_sign_error = '🚨'
-let g:ale_sign_warning = '⚡️'
-" let g:ale_javascript_eslint_use_global = 1
 
 " --------------- Prettier on save --------------
-"
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
+autocmd BufWritePre *.jsx,*.ts,*.tsx,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
 " ---------------  Haskell-vim --------------
 "
 let g:haskell_indent_disable = 1

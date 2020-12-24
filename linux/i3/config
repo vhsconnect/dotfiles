@@ -185,7 +185,7 @@ client.urgent $cbg $cunfo $ccolor $cindi $cunfo
 #for_window [class="^.*"] border pixel 0
 
 # to execute a command on start use exec or exec_always
-exec --no-startup-id  feh --bg-scale ~/Pictures/forrest4.png
+exec --no-startup-id  feh --bg-scale ~/Pictures/blue-yacht.png
 
 #compositor w/ transition effects and rofi opacity 
 exec --no-startup-id compton -f

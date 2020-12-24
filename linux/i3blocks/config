@@ -21,6 +21,26 @@ command=$SCRIPT_DIR/$BLOCK_NAME
 separator_block_width=30
 markup=none
 
+[temp1]
+label=
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/core1temp
+interval=5
+
+[temp2]
+label=
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/core2temp
+interval=5
+
+[temp3]
+label=
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/core3temp
+interval=5
+
+[temp4]
+label=
+command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/core4temp
+interval=5
+
 [battery]
 command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/battery2
 label= 
@@ -45,3 +65,4 @@ label=
 command=/home/vhs/Repos/dotfiles/self/dotfiles/linux/i3blocks/calendar
 interval=59
 color=#00FA9A
+
