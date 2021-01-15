@@ -18,8 +18,6 @@ set autowrite
 set inccommand=split
 set foldmethod=indent   
 set foldnestmax=10
-set dictionary?
-set dictionary+=/usr/share/dict/words
 set nofoldenable
 set foldlevel=2
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -42,6 +40,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'posva/vim-vue'
 Plug 'mileszs/ack.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/limelight.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'christoomey/vim-tmux-navigator'
@@ -140,6 +139,7 @@ nnoremap <space><space>u :bufdo e<CR> "re-read from filesystem all
 nnoremap <space>e :ALEDetail<CR>
 nnoremap <space>s :set spell<CR>
 nnoremap <space><space>s :set nospell<CR>
+nnoremap <space>l :Prettier<CR>
 nnoremap <space>b <C-W>z      "close info buffer
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
@@ -149,55 +149,36 @@ nnoremap L 10l
 nnoremap H 10h
 
 " --------------- REMAPS FZF --------------
-
 imap <c-x><c-l> <plug>(fzf-complete-buffer-line)
 nnoremap <silent> <c-p> :Files<CR>
 nnoremap <leader>p :BLines<CR> 
 nnoremap <silent> <c-g> :Ag<CR> 
-inoremap <expr> <c-x><c-k> fzf#vim#complete('cat /usr/share/dict/words')
 " --------------- REMAPS COLORS --------------
-
 nnoremap <space>1 :colorscheme OceanicNext<CR>
 nnoremap <space>2 :colorscheme desert256<CR>
 nnoremap <space>3 :colorscheme seoul256<CR>
 nnoremap <space>4 :colorscheme jhdark<CR>
-nnoremap <space>5 :colorscheme calmar256-light<CR>
-nnoremap <space>6 :colorscheme bubblegum-256-light<CR>
+nnoremap <space>5 :colorscheme seoul256-light<CR>
+nnoremap <space>6 :colorscheme wikipedia<CR>
 nnoremap <space>7 :colorscheme horseradish256<CR>
 nnoremap <space>8 :colorscheme babymate256<CR>
 nnoremap <space>9 :colorscheme zenburn<CR>
 nnoremap <space>0 :colorscheme dracula<CR>
 " --------------- navigate splits --------------
-
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 " --------------- FZF --------------
-
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-" --------------- Ale --------------
+" --------------- ALE --------------
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_typescript_tsserver_config_path = '/home/vhs/.nvm/versions/node/v12.16.1/bin/tsserver'
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'typescript': ['eslint', 'tsserver'],
-      \ 'html': ['tidy'],
-      \ 'haskell': ['hdevtools'],
-      \ 'css': ['stylelint']
-      \ }
-let g:ale_linter_aliases = {'vue': ['css', 'javascript']}
-let g:ale_fixers = {
-      \ 'javascript': ['eslint', 'prettier'],
-      \ 'json': ['prettier'],
-      \ 'haskell': ['hindent'],
-      \ 'css': ['stylelint']
-      \ }
-let g:ale_completion_enabled=1
+let g:ale_lint_on_save = 1
+" let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc
 highlight ALEWarning ctermbg=Blue ctermfg=Yellow
 highlight ALEError ctermbg=Blue ctermfg=White
@@ -205,24 +186,33 @@ let g:ale_sign_error = '🚨'
 let g:ale_sign_warning = '⚡️'
 
 " --------------- Deoplete --------------
+"
+" set completeopt+=noinsert
+"  let g:deoplete#enable_at_startup = 1
+" let g:deoplete#disable_auto_complete = 1
+"
+" call deoplete#custom#option({
+"        \'auto_complete_delay': 600,
+"        \})
+"
+" call deoplete#custom#source('_',
+" 		\ 'disabled_syntaxes', ['Comment', 'String', 'Constant', 'Buffer'])
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-      \'auto_complete_delay': 500,
-      \})
-call deoplete#custom#source('_',
-		\ 'disabled_syntaxes', ['Comment', 'String', 'Constant', 'Buffer'])
 
-autocmd FileType txt
-\ call deoplete#custom#buffer_option('auto_complete', v:false)
-inoremap <silent><expr> <TAB>
-		\ pumvisible() ? "\<C-n>" :
-		\ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#manual_complete()
-		function! s:check_back_space() abort "{{{
-		let col = col('.') - 1
-		return !col || getline('.')[col - 1]  =~ '\s'
-		endfunction"}}}
+" call deoplete#custom#var('omni', 'input_patterns', {
+" \ 'javascript': '[^. *\t]\.\w*',
+" \ })
+
+
+" inoremap <silent><expr> <TAB>
+"     \ pumvisible() ? "\<C-n>" :
+"     \ <SID>check_back_space() ? "\<Tab>" :
+"     \ deoplete#complete()
+" function! s:check_back_space() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
 highlight Pmenu ctermbg=49 ctermfg=0
 highlight PmenuSel ctermbg=0 ctermfg=49
 highlight PmenuSbar ctermbg=0 ctermfg=49
@@ -234,7 +224,7 @@ let g:airline_section_y = ''
 let g:airline_section_z = ''
 
 " --------------- Prettier on save --------------
-autocmd BufWritePre *.jsx,*.ts,*.tsx,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
+autocmd BufWritePre *.js,*.mjs,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.html Prettier
 " ---------------  Haskell-vim --------------
 "
 let g:haskell_indent_disable = 1

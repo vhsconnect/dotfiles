@@ -1,0 +1,11 @@
+#!/bin/bash
+
+synclient AreaLeftEdge=2000
+synclient AreaRightEdge=5000
+synclient PalmDetect=1
+synclient VertEdgeScroll=0
+synclient MinSpeed=1.25
+synclient MaxSpeed=4
+synclient ClickFinger2=1
+synclient ClickFinger3=3
+keys

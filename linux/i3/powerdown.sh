@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DIALOG_RESULT=$(echo -e 'exit i3\nhibernate\nreboot\nshutdown' | rofi -dmenu -i -p "zzz - " -hide-scrollbar -tokenize -lines 4 -eh 1 -width 40  -padding 20 -disable-history -font "Iosevka TermLig SS08 Medium 12")
+DIALOG_RESULT=$(echo -e 'exit i3\nhibernate\nreboot\nshutdown' | rofi -dmenu -i -p "> " -hide-scrollbar -tokenize -lines 4 -eh 1 -width 40  -padding 20 -disable-history -font "Iosevka TermLig SS08 Medium 12")
 
 echo "This result is : $DIALOG_RESULT"
 sleep 1;
