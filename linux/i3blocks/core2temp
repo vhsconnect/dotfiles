@@ -2,7 +2,7 @@
 
 MonDir='/sys/class/hwmon/hwmon4'
 
-core=`< "$MonDir</temp2_input"`
+core=`< "$HMON_DIR/temp2_input"`
 echo "   "
 echo "323"
 if [ "$core" -ge "80000" ]; then
