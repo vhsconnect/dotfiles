@@ -53,6 +53,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'branch': 'release/1.x',
@@ -175,8 +176,13 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:ale_typescript_tsserver_config_path = '/home/vhs/.nvm/versions/node/v12.16.1/bin/tsserver'
+" let g:ale_typescript_tsserver_config_path = '/home/$USER/.nvm/versions/node/v12.16.1/bin/tsserver'
 let g:ale_fix_on_save = 1
+  let g:ale_fixers = {
+  \   'javascript': [
+  \       'eslint',
+  \   ],
+  \}
 let g:ale_lint_on_save = 1
 " let g:ale_completion_enabled = 1
 set omnifunc=ale#completion#OmniFunc
@@ -213,9 +219,9 @@ let g:ale_sign_warning = '⚡️'
 "     return !col || getline('.')[col - 1]  =~# '\s'
 " endfunction
 
-highlight Pmenu ctermbg=49 ctermfg=0
-highlight PmenuSel ctermbg=0 ctermfg=49
-highlight PmenuSbar ctermbg=0 ctermfg=49
+" highlight Pmenu ctermbg=49 ctermfg=0
+" highlight PmenuSel ctermbg=0 ctermfg=49
+" highlight PmenuSbar ctermbg=0 ctermfg=49
 
 " --------------- Airline --------------
 let g:airline#extensions#ale#enabled = 1
@@ -246,3 +252,5 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 
 " ---------------  vue syntax highlighting | vim-vue --------------
 let g:vue_pre_processors = 'detect-on-enter'
+" ---------------  COC --------------
+source /home/$USER/Repos/dotfiles/self/dotfiles/linux/nvim/cocfile.vim 
