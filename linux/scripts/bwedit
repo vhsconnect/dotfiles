@@ -1,0 +1,8 @@
+#! /bin/bash
+item=$1
+IID=$(bw get item $item | jq -r '.id') 
+echo deleting $IID
+bw delete item $IID
+echo OK
+echo re-enter item information
+bwadd

@@ -1,0 +1,2 @@
+#! /bin/bash
+find . -depth -name "*.wav" -execdir bash -c 'ffmpeg -i $1 -vn -ar 44100 -ac 2 -b:a 192k ${1%.*}.mp3' - {} \;

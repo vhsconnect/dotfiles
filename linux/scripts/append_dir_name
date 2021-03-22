@@ -1,0 +1,11 @@
+#! /bin/bash
+# append one of parent dir names to file names
+
+ALL=($(find . -type f))
+
+for i in "${ALL[@]}"; do
+  extension=${i: -3}
+    #delimiter is /
+    IFS='/' read -ra path <<< "$i"
+    mv ${path[0]}/${path[1]}/${path[2]}/${path[3]} ${path[0]}/${path[1]}/${path[2]}/${path[1]}--${path[3]}
+done

@@ -1,0 +1,10 @@
+#!/bin/bash
+shopt -s nocasematch
+input=$1
+echo $input
+# if  [[ $input =~ ^.{3,20}$ ]];
+if  [[ $input =~ .*snow.* ]]  \
+# [^%&',;=?$\x22]+
+then echo 'ok';
+else echo 'no';
+fi

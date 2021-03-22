@@ -1,0 +1,10 @@
+#! /bin/bash
+
+
+# split string from stdin and store into ARR
+IFS='/' read -ra ARR <<< "$1"
+
+# for each elem in the ARR, echo elem
+for i in "${ARR[@]}"; do
+  echo "$i";
+done

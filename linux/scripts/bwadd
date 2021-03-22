@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+
+const { exec } = require("child_process");
+const { writeFileSync } = require("fs");
+let readline = require("readline");
+
+let rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+let template = {
+  organizationId: null,
+  folderId: null,
+  type: 1,
+  name: "Item name",
+  notes: "Some notes about this item.",
+  favorite: false,
+  fields: [],
+  login: {
+    uris: [],
+    username: "jdoe",
+    password: "myp@ssword123",
+    totp: "",
+  },
+  secureNote: null,
+  card: null,
+  identity: null,
+};
+
+let questions = ["name?\n", "user?\n", "pass?\n"];
+let answers = [];
+
+function prompt(questions, cb) {
+  rl.question(questions.shift(), (ans) => {
+    answers.push(ans);
+    if (!questions.length) {
+      cb(answers);
+      rl.close();
+    } else prompt(questions, cb);
+  });
+}
+
+//////////////////////////////////
+
+prompt(questions, (answers) => {
+  template.name = answers[0];
+  template.login.username = answers[1];
+  template.login.password = answers[2];
+  writeFileSync("temp.json", JSON.stringify(template));
+  exec(`cat temp.json | bw encode | bw create item`, (err, stdout, stderr) => {
+    if (!err && !stderr) {
+      console.log(stdout);
+      exec("rm temp.json", () => console.log("clean"));
+    } else console.error(err, stderr);
+  });
+});

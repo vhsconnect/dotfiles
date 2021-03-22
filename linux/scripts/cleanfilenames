@@ -1,0 +1,11 @@
+#! /bin/bash
+
+find . -depth -name "* *" -execdir rename 's/ /_/g' "{}" \;
+find . -depth -name "*'*" -execdir rename "s/\'/_/g" "{}" \;
+find . -depth -name "*(*" -execdir rename "s/\(/_/g" "{}" \;
+find . -depth -name "*)*" -execdir rename "s/\)/_/g" "{}" \;
+find . -depth -name "*[*" -execdir rename "s/\\[/_/g" "{}" \;
+find . -depth -name "*]*" -execdir rename "s/\\]/_/g" "{}" \;
+find . -depth -name "*#*" -execdir rename "s/\\#/_/g" "{}" \;
+find . -depth -name "*$*" -execdir rename "s/\\$/_/g" "{}" \;
+find . -depth -name "*&*" -execdir rename "s/\\&/and/g" "{}" \;

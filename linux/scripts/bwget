@@ -1,0 +1,6 @@
+#! /bin/bash
+item=$1
+U=$(bw get username $item)
+bw get password $item | xclip -i -selection clipboard
+echo user $U
+echo OK

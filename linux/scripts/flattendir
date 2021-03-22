@@ -1,0 +1,4 @@
+#! /bin/bash
+
+# recursively moves all files from wd and children dirs to ~/SomeDir
+find . -mindepth 2 -type f | xargs -l bash -c 'mv $0 ~/SomeDir' 

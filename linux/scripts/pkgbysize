@@ -1,0 +1,4 @@
+#! /bin/bash
+
+# list all packages by size
+dpkg-query -W --showformat='${Installed-Size;10}\t${Package}\n' | sort -k1,1n

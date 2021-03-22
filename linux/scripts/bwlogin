@@ -1,0 +1,8 @@
+#! /bin/bash
+
+bw logout
+user=$1
+pass=$2
+session=$(bw login --raw $user $pass)
+echo session $session
+export BW_SESSION=$session
