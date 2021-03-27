@@ -52,12 +52,12 @@ else:
         return string+'%'
 
     list3 = []
-    for x in range(0,2):
+    for x in range(0,1):
         list3.append(str(percentleft_batteries[x]) +'%')
-    if state_batteries[1]=='Discharging':
-        str3 = '↓ ' + list3[0] + ' ' + list3[1]
+    if state_batteries[0]=='Discharging':
+        str3 = '↓ ' + list3[0] 
     elif state_batteries[0]=='Discharging':
-        str3 = '↓ ' + list3[0] + ' ' + list3[1]
+        str3 = '↓ ' + list3[0] 
     else:
-        str3 = '↑ ' + list3[0] + ' ' + list3[1]
+        str3 = '↑ ' + list3[0] 
 print(str3)

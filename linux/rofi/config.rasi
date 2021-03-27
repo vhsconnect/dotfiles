@@ -4,67 +4,62 @@
  * Copyright: Dean Davidson
  ******************************************************************************/
 
-* {
-    /**** Solarized colors *****/
 
-    base03: #002b36;
-    base02: #073642;
-    base01: #586e75;
-    base00: #657b83;
-    base0: #839496;
-    base1: #93a1a1;
-    base2: #eee8d5;
-    base3: #fdf6e3;
-    yellow: #b58900;
-    orange: #cb4b16;
-    red: #dc322f;
-    magenta: #d33682;
-    violet: #6c71c4;
-    blue: #268bd2;
-    cyan: #2aa198;
-    green: #859900;
-    forestgreen: #00FA9A;
-    dragonskin: #4c3942;
-    white: #fff;
-
-    /* Solarized Darker Theme */
-    transparent-background: rgba ( 0, 0, 0, 0 % );
-    foreground:                  @forestgreen;
-    background:                  rgba ( 0, 0, 0, 90 % );
-
-    normal-foreground:           @foreground;
-    normal-background:           @transparent-background;
-    active-foreground:           @green;
-    active-background:           @transparent-background;
-    urgent-foreground:           @red;
-    urgent-background:           @transparent-background;
-
-    selected-normal-foreground:  @white;
-    selected-normal-background:  @dragonskin;
-    selected-active-foreground:  @green;
-    selected-active-background:  @base02;
-    selected-urgent-foreground:  @red;
-    selected-urgent-background:  @base02;
-
-    alternate-normal-foreground: @foreground;
-    alternate-normal-background: @transparent-background;
-    alternate-active-foreground: @active-foreground;
-    alternate-active-background: @transparent-background;
-    alternate-urgent-foreground: @urgent-foreground;
-    alternate-urgent-background: @transparent-background;
-
-    separatorcolor:              @forestgreen;
-
-    /* Main element styles */
-    border-color:                @forestgreen;
-    spacing:                     2;
-    background-color:            @transparent-background;
-}
 configuration {
-  font: "Iosevka TermLig SS08 15";
+  font: "Iosevka Term Light 15";
   lines: 5;
   display-run: "> ";
   show-icons: true;
+  base03: #002b36;
+  base02: #073642;
+  base01: #586e75;
+  base00: #657b83;
+  base0: #839496;
+  base1: #93a1a1;
+  base2: #eee8d5;
+  base3: #fdf6e3;
+  yellow: #b58900;
+  orange: #cb4b16;
+  red: #dc322f;
+  magenta: #d33682;
+  violet: #6c71c4;
+  blue: #268bd2;
+  cyan: #2aa198;
+  green: #859900;
+  forestgreen: #00FA9A;
+  dragonskin: #4c3942;
+  white: #fff;
+  transparent-background: rgba ( 0, 0, 0, 0 % );
+  foreground:                  @forestgreen;
+  background:                  rgba ( 0, 0, 0, 90 % );
+
+  normal-foreground:           @foreground;
+  normal-background:           @transparent-background;
+  active-foreground:           @green;
+  active-background:           @transparent-background;
+  urgent-foreground:           @red;
+  urgent-background:           @transparent-background;
+
+  selected-normal-foreground:  @white;
+  selected-normal-background:  @dragonskin;
+  selected-active-foreground:  @green;
+  selected-active-background:  @base02;
+  selected-urgent-foreground:  @red;
+  selected-urgent-background:  @base02;
+
+  alternate-normal-foreground: @foreground;
+  alternate-normal-background: @transparent-background;
+  alternate-active-foreground: @active-foreground;
+  alternate-active-background: @transparent-background;
+  alternate-urgent-foreground: @urgent-foreground;
+  alternate-urgent-background: @transparent-background;
+
+  separatorcolor:              @forestgreen;
+
+  /* Main element styles */
+  border-color:                @forestgreen;
+  spacing:                     2;
+  background-color:            @transparent-background;
 }
 
 
@@ -107,12 +102,12 @@ element normal.urgent {
     text-color:       @urgent-foreground;
 }
 element normal.active {
-    background-color: @active-background;
+    background-color: #6c71c4;
     text-color:       @active-foreground;
 }
 element selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
+    background-color: #3275bc;
+    text-color:       #e6effc;
 }
 element selected.urgent {
     background-color: @selected-urgent-background;

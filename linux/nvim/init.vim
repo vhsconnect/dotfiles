@@ -79,6 +79,7 @@ call plug#end()
 " ----------- THEME ----------
 let g:dracula_italic = 0
 colorscheme dracula
+hi! Normal ctermbg=none
 " ----------- lightline ----------
 
 let g:lightline = {
@@ -151,7 +152,7 @@ nnoremap H 10h
 
 " --------------- REMAPS FZF --------------
 imap <c-x><c-l> <plug>(fzf-complete-buffer-line)
-nnoremap <silent> <c-p> :Files<CR>
+nnoremap <silent> <c-p> :GFiles<CR>
 nnoremap <leader>p :BLines<CR> 
 nnoremap <silent> <c-g> :Ag<CR> 
 " --------------- REMAPS COLORS --------------
@@ -179,13 +180,12 @@ let g:ale_lint_on_enter = 0
 " let g:ale_typescript_tsserver_config_path = '/home/$USER/.nvm/versions/node/v12.16.1/bin/tsserver'
 let g:ale_fix_on_save = 1
   let g:ale_fixers = {
-  \   'javascript': [
-  \       'eslint',
-  \   ],
+  \      'typescript': ['eslint'],
+  \      'javascript': ['eslint'],
   \}
 let g:ale_lint_on_save = 1
-" let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
+" " let g:ale_completion_enabled = 1
+" set omnifunc=ale#completion#OmniFunc
 highlight ALEWarning ctermbg=Blue ctermfg=Yellow
 highlight ALEError ctermbg=Blue ctermfg=White
 let g:ale_sign_error = '🚨'
@@ -253,4 +253,4 @@ autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()
 " ---------------  vue syntax highlighting | vim-vue --------------
 let g:vue_pre_processors = 'detect-on-enter'
 " ---------------  COC --------------
-source /home/$USER/Repos/dotfiles/self/dotfiles/linux/nvim/cocfile.vim 
+source /home/$USER/Repos/dotfiles/linux/nvim/cocfile.vim 

@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/zsh
 
 MonDir='/sys/class/hwmon/hwmon4'
 
@@ -11,7 +11,7 @@ elif [ "$core" -ge "70000" ]; then
  echo "#F86E51"
 elif [ "$core" -ge "60000" ]; then
  echo "#FBA465"
-elif [ "$core" -ge "500000" ]; then
+elif [ "$core" -ge "50000" ]; then
  echo "#F2C85B"
-else echo "#00FA9A"
+else echo "#e6effc"
 fi
