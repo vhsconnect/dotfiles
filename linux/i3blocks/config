@@ -46,14 +46,14 @@ command=/home/vhs/Repos/dotfiles/linux/i3blocks/battery2
 label= 
 interval=30
 color=#e6effc
-
-[bandwidth]
-command=/home/vhs/Repos/dotfiles/linux/i3blocks/bandwidth3
-markup=pango
-label=
-interval=persist
-color=#e6effc
-
+#
+# [bandwidth]
+# command=/home/vhs/Repos/dotfiles/linux/i3blocks/bandwidth3
+# markup=pango
+# label=
+# interval=persist
+# color=#e6effc
+#
 [weather]
 label=
 command=/home/vhs/Repos/dotfiles/linux/i3blocks/weather
