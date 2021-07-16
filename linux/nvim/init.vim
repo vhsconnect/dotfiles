@@ -6,13 +6,19 @@ set nu rnu
 set noshowmode
 set cursorline
 set autoindent
+set updatetime=300
 set autoread
 set incsearch 
 set hlsearch 
 set backspace=indent,eol,start
 set shiftwidth=2
 set smartindent
+
+set tabstop=2
+set shiftwidth=2
 set expandtab
+retab!
+
 set mouse=a
 set autowrite
 set inccommand=split
@@ -23,6 +29,8 @@ set foldlevel=2
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff700-blinkon700-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff200-blinkon250
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " --------------- vim-plug ----------
 
 call plug#begin('~/.vim/plugged')
@@ -81,8 +89,8 @@ call plug#end()
 
 " ----------- THEME ----------
 let g:dracula_italic = 0
-colorscheme horseradish256
-let g:airline_theme='hybrid'
+colorscheme seoul256-light
+let g:airline_theme='seoul256'
 hi! Normal ctermbg=none
 " ----------- lightline ----------
 
@@ -178,7 +186,7 @@ nnoremap <space>3 :colorscheme seoul256<CR>
 nnoremap <space>4 :colorscheme jhdark<CR>
 nnoremap <space>5 :colorscheme wombat256<CR>
 nnoremap <space>6 :colorscheme wikipedia<CR>
-nnoremap <space>7 :colorscheme horseradish256<CR>
+nnoremap <space>7 :colorscheme seoul256-light<CR>
 nnoremap <space>8 :colorscheme babymate256<CR>
 nnoremap <space>9 :colorscheme zenburn<CR>
 nnoremap <space>0 :colorscheme dracula<CR>
