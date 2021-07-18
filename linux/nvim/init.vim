@@ -89,8 +89,8 @@ call plug#end()
 
 " ----------- THEME ----------
 let g:dracula_italic = 0
-colorscheme seoul256-light
-let g:airline_theme='seoul256'
+colorscheme horseradish256
+let g:airline_theme='hybrid'
 hi! Normal ctermbg=none
 " ----------- lightline ----------
 
@@ -186,7 +186,7 @@ nnoremap <space>3 :colorscheme seoul256<CR>
 nnoremap <space>4 :colorscheme jhdark<CR>
 nnoremap <space>5 :colorscheme wombat256<CR>
 nnoremap <space>6 :colorscheme wikipedia<CR>
-nnoremap <space>7 :colorscheme seoul256-light<CR>
+nnoremap <space>7 :colorscheme horseradish256<CR>
 nnoremap <space>8 :colorscheme babymate256<CR>
 nnoremap <space>9 :colorscheme zenburn<CR>
 nnoremap <space>0 :colorscheme dracula<CR>

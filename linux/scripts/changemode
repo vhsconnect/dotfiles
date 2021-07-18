@@ -1,0 +1,30 @@
+# /bin/bash
+
+VIM_DARK="colorscheme horseradish256"
+VIM_LIGHT="colorscheme seoul256-light"
+AIRLINE_DARK="let g:airline_theme='hybrid'"
+AIRLINE_LIGHT="let g:airline_theme='seoul256'"
+BAT_THEME_DARK="Monokai Extended"
+BAT_THEME_LIGHT="OneHalfLight"
+
+
+while getopts "ld" OPTION
+do
+  case $OPTION in
+    l)
+      sed -i s/xfce4-terminal/gnome-terminal/ ~/Repos/dotfiles/linux/i3/config
+      sed -i "s/$VIM_DARK/$VIM_LIGHT/" ~/Repos/dotfiles/linux/nvim/init.vim
+      sed -i "s/$AIRLINE_DARK/$AIRLINE_LIGHT/" ~/Repos/dotfiles/linux/nvim/init.vim
+      sed -i "s/$BAT_THEME_DARK/$BAT_THEME_LIGHT/" ~/.zshrc
+      echo "light mode ._."
+      ;;
+    d)
+      sed -i s/gnome-terminal/xfce4-terminal/ ~/Repos/dotfiles/linux/i3/config
+      sed -i "s/$VIM_LIGHT/$VIM_DARK/" ~/Repos/dotfiles/linux/nvim/init.vim
+      sed -i "s/$AIRLINE_LIGHT/$AIRLINE_DARK/" ~/Repos/dotfiles/linux/nvim/init.vim
+      sed -i "s/$BAT_THEME_LIGHT/$BAT_THEME_DARK/" ~/.zshrc
+      echo "dark mode .-."
+      ;;
+  esac
+done 
+

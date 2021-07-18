@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd ~/.var/app/org.gimp.GIMP/current/932f72fe2ec93dfa29f8fc32f738f48b5f0f55ddc5baa6b96178f33ef6f7ba16/files/share/applications/
+gtk-launch org.gimp.GIMP.desktop
